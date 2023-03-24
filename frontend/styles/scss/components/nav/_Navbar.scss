@@ -1,0 +1,15 @@
+nav.nav-bar--hidden {
+    transform: translateY(-100%)!important;
+}
+
+.my-navbar{
+    transition: transform 150ms ease-in-out;
+    .nav-link{
+        &:hover{
+            color: #aba6a6 !important;
+        }
+    }
+
+    
+      
+}

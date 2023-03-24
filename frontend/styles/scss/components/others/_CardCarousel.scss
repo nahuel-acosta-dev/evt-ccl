@@ -1,0 +1,22 @@
+.my-swiper-slide{
+    width: 50%;
+}
+
+
+@mixin cardCarousel-responsive-lg{
+    .my-swiper-slide{
+        width: 80%;
+    }
+}
+
+@mixin cardCarousel-responsive-md{
+    .my-swiper-slide{
+        width: 90%;
+    }
+}
+
+@mixin cardCarousel-responsive-sm{
+    .my-swiper-slide{
+        width: 100%;
+    }
+}

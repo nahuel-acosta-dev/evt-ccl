@@ -1,0 +1,64 @@
+$xxl: 1400px;
+$xl: 1200px;
+$lg: 992px;
+$md: 767px;
+$sm: 576px;
+
+
+@media all and (max-width: $xxl){
+
+ }
+
+ @media all and (min-width:$lg ) and (max-width: $xl){
+    
+ }
+
+@media all and (max-width: $lg){
+}
+
+@media all and (min-width:$md ) and (max-width: $lg){
+    @include carousel-responsive-lg;
+    @include cardCarousel-responsive-lg;
+}
+
+@media all and (max-width: $md){
+        .nav-small{
+            display: none;
+        }
+}
+
+@media all and (min-width:$sm ) and (max-width: $md){
+    @include carousel-responsive-md;
+    @include icon-responsive-md;
+    @include cardCarousel-responsive-md;
+}
+
+@media all and (max-width: $sm){
+////////////////////////////////
+//1- Components
+////////////////////////////////
+@include carousel-responsive-sm;
+@include icon-responsive-sm;
+@include cardCarousel-responsive-sm;
+////////////////////////////////
+//1- Section
+////////////////////////////////
+
+ ////////////////////////////////
+//2- Pages
+////////////////////////////////
+
+}
+
+@media all and (max-height: 576px){
+   
+}
+
+@media all and (max-height: 500px){
+    
+}
+
+@media all and (max-height: 500px){
+    
+    
+}

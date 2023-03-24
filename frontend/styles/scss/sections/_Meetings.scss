@@ -1,0 +1,23 @@
+.title-meetings{
+    font-size: 3.5rem;
+    &::after{
+        background: #101c9a;
+        content: '';
+        display: block;
+        height: 12px;
+        margin: 50px auto;
+        width: 130px;
+    }
+}
+
+.btn-meetings{
+    padding-left: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 4rem;
+    &:hover {
+        color: #fff!important;
+        transition:all 0.3s ease-in-out;
+        background-color: #000;
+    }
+  }

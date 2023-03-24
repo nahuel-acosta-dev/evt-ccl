@@ -1,0 +1,17 @@
+$title: 'Kanit', sans-serif;
+$paragraph: 'Pavanam', sans-serif;
+
+
+
+body{
+    font-family: $title;
+    overflow-x: hidden;
+}
+
+.title{
+    font-family: $title;
+}
+
+.paragraph{
+    font-family: $paragraph;
+}
