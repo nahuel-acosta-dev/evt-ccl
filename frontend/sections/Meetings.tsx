@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Button, Col, Row } from "react-bootstrap";
 import Puerta from '../img/puerta.svg';
 import Entrada from '../img/entrada.svg';
@@ -19,7 +20,7 @@ const Meetings = () => {
 
                         <Row>
                             <Col>
-                                <img src={Estadio} alt="" height="85"/>
+                                <Image src={Estadio} alt="" height="85"/>
                                 <h3 className="mt-5 fs-4 fw-bold">ESTADIO | CALLE FALSA 123</h3>
                                 <p className="fs-5">
                                     Día 00:00hs.
@@ -35,7 +36,7 @@ const Meetings = () => {
                                 </Button>
                             </Col>
                             <Col>
-                                <img src={Estadio} alt="" height="85"/>
+                                <Image src={Estadio} alt="" height="85"/>
                                 <h3 className="mt-5 fs-4 fw-bold">ESTADIO | CALLE FALSA 123</h3>
                                 <p className="fs-5">
                                     Día 00:00hs.

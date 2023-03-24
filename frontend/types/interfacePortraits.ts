@@ -1,4 +1,6 @@
+import { StaticImageData } from "next/image"
+
 export type interfacePortraits = {
-    img: string,
+    img: StaticImageData,
     alt: string
 }

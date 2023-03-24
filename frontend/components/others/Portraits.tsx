@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { FC } from "react";
 import { PropsDetails } from "../../types/generics";
 import { Col, Row } from "react-bootstrap";
@@ -15,7 +16,7 @@ const Portraits: FC<PropsDetails> = ({
             <Row className="mb-5">
                 {portraits.map((portrait, i) => (
                     <Col sm={4} key={i}>
-                        <img src={portrait.img} alt={portrait.alt} className="img-fluid mb-5"/>
+                        <Image src={portrait.img} alt={portrait.alt} className="img-fluid mb-5"/>
                     </Col>
                 ))}
                 {/*children*/}

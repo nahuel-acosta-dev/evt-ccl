@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pavanam&display=swap');
+@import '~bootstrap/scss/bootstrap.scss';
+@import './scss/config/Basic';
+
+
+
+////////////////////////////////
+/// Components
+////////////////////////////////
+@import './scss/components/nav/Sidebar';
+@import './scss/components/nav/Navbar';
+@import './scss/components/others/Carousel';
+@import './scss/components/others/Icon';
+@import './scss/components/others/Dates';
+@import './scss/components/others/CardCarousel';
+
+////////////////////////////////
+/// Sections
+////////////////////////////////
+@import './scss/sections/Meetings.scss';
+@import './scss/sections/Details.scss';
+
+
+////////////////////////////////
+/// Config
+////////////////////////////////
+@import './scss/config/Responsive';
