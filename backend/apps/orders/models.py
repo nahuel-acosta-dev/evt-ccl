@@ -1,5 +1,5 @@
 from django.db import models
-from apps.product.models import Product
+from apps.products.models import Product
 from .countries import Countries
 from datetime import datetime
 from django.contrib.auth import get_user_model

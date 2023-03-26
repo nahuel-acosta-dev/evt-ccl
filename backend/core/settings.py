@@ -74,11 +74,12 @@ DJANGO_APPS = [
     'django.contrib.sites',
 ]
 
-PROJECT_APPS = ['apps.user', 'apps.user_profile']
+PROJECT_APPS = ['apps.user', 'apps.category']
 CHAT_APPS = []
 THIRD_PARTY_APPS = [
     'corsheaders',
     'rest_framework',
+    'rest_framework_extensions',
     'djoser',
     'social_django',
     'rest_framework_simplejwt',

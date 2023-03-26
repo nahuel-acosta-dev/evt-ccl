@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework.views import APIView
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
@@ -9,12 +10,23 @@ from .models import Category
 # Create your views here.
 
 
-class ListCategoriesView(APIView):
+class CategoriesView(viewsets.GenericViewSet):
+    model = Category
+    queryset = None
     permission_classes = (permissions.AllowAny, )
 
-    def get(self, request, format=None):
-        if Category.objects.all().exists():
-            categories = Category.objects.all()
+    def get_object(self, pk):
+        return get_object_or_404(self.model, pk=pk)
+
+    def get_queryset(self):
+        if self.queryset is None:
+            self.queryset = self.serializer_class().Meta.model.objects\
+                .all()
+        return self.queryset
+
+    def retrieve(self, request, pk=None):
+        if self.model.objects.all().exists():
+            categories = self.model.objects.all()
 
             result = []
 
