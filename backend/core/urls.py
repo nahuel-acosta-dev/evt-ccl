@@ -56,6 +56,7 @@ urlpatterns = [
     ############
     path('', include('apps.category.urls')),
     path('', include('apps.products.urls')),
+    path('', include('apps.orders.urls')),
     ############
 
     path('admin/', admin.site.urls),

@@ -74,7 +74,7 @@ DJANGO_APPS = [
     'django.contrib.sites',
 ]
 
-PROJECT_APPS = ['apps.user', 'apps.category', 'apps.products']
+PROJECT_APPS = ['apps.user', 'apps.category', 'apps.products', 'apps.orders']
 CHAT_APPS = []
 THIRD_PARTY_APPS = [
     'corsheaders',

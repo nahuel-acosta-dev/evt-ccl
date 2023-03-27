@@ -1,21 +1,32 @@
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import viewsets
 from .models import Order, OrderItem
 
 
-class OrdersView(GenericAPIView):
+class OrdersView(viewsets.GenericViewSet):
     model = Order
     queryset = None
 
-    def retrieve(self, request, transactionId, format=None):
+    def get_object(self, pk):
+        return get_object_or_404(self.model, pk=pk)
+
+    def get_queryset(self):
+        if self.queryset is None:
+            self.queryset = self.serializer_class().Meta.model.objects\
+                .all()
+        return self.queryset
+
+    def retrieve(self, request, pk=None):
         user = self.request.user
 
         try:
-            if self.model.objects.filter(user=user, transaction_id=transactionId).exists():
+            if self.model.objects.filter(user=user, transaction_id=pk).exists():
                 order = self.model.objects.get(
-                    user=user, transaction_id=transactionId)
+                    user=user, transaction_id=pk)
                 result = {}
                 result['status'] = order.status
                 result['transaction_id'] = order.transaction_id
@@ -60,10 +71,11 @@ class OrdersView(GenericAPIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-    def list(self, request, format=None):
+    def list(self, request, pk=None):
         user = self.request.user
         try:
-            orders = Order.objects.order_by('-date_issued').filter(user=user)
+            orders = self.model.objects.order_by(
+                '-date_issued').filter(user=user)
             result = []
 
             for order in orders:
