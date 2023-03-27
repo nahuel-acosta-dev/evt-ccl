@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 from rest_framework.decorators import (api_view, permission_classes,
                                        action)
+from django.utils.decorators import method_decorator
+from drf_yasg.utils import no_body, swagger_auto_schema
 from apps.products.models import Product
 from apps.products.serializers import ProductSerializer
 from apps.category.models import Category
@@ -13,7 +15,7 @@ from rest_framework.generics import GenericAPIView
 from django.db.models import Q
 
 
-class ProductsView(GenericAPIView):
+class ProductsView(viewsets.GenericViewSet):
     """
         endpoint de products
     """
@@ -32,7 +34,7 @@ class ProductsView(GenericAPIView):
                 .all()
         return self.queryset
 
-    def retrieve(self, request, productId, format=None):
+    def retrieve(self, request, pk=None):
         """
             es importante documentar todos los endpoints,
             como por ejemplo con la devolucion que hace al ser llamada.
@@ -42,13 +44,13 @@ class ProductsView(GenericAPIView):
             name ----> id de producto
         """
         try:
-            product_id = int(productId)
+            product_id = int(pk)
         except:
             return Response(
                 {'error': 'Product ID must be an integer'},
                 status=status.HTTP_404_NOT_FOUND)
 
-        if Product.objects.filter(id=product_id).exists():
+        if self.model.objects.filter(id=product_id).exists():
             product = Product.objects.get(id=product_id)
 
             product = self.serializer_class(product)
@@ -59,7 +61,7 @@ class ProductsView(GenericAPIView):
                 {'error': 'Product with this ID does not exist'},
                 status=status.HTTP_404_NOT_FOUND)
 
-    def list(self, request, format=None):
+    def list(self, request, pk=None):
         sortBy = request.query_params.get('sortBy')
 
         if not (sortBy == 'date_created' or sortBy == 'price' or sortBy == 'sold' or sortBy == 'name'):
@@ -98,8 +100,8 @@ class ProductsView(GenericAPIView):
                 {'error': 'No products to list'},
                 status=status.HTTP_404_NOT_FOUND)
 
-    @action(detail=False, methods=['POST'], url_name='list_search',
-            url_path='list_search')
+    @action(detail=False, methods=['POST'], url_name='search',
+            url_path='search')
     def list_search(self, request, format=None):
         data = self.request.data
 
@@ -163,14 +165,14 @@ class ProductsView(GenericAPIView):
                     '-date_created'
                 ).filter(category__in=filtered_categories)
 
-        search_results = ProductSerializer(search_results, many=True)
+        search_results = self.serializer_class(search_results, many=True)
         return Response({'search_products': search_results.data}, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=['GET'], url_name='list_related',
-            url_path='list_related')
-    def list_related(self, request, productId, format=None):
+    @action(methods=['GET'], url_name='related',
+            url_path='related', detail=True, )
+    def list_related(self, request, pk=None):
         try:
-            product_id = int(productId)
+            product_id = int(pk)
         except:
             return Response(
                 {'error': 'Product ID must be an integer'},
@@ -232,9 +234,9 @@ class ProductsView(GenericAPIView):
                 {'error': 'No related products found'},
                 status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=['POST'], url_name='list_by_search',
-            url_path='list_by_search')
-    def list_by_search(self, request, format=None):
+    @action(detail=False, methods=['POST'], url_name='by_search',
+            url_path='by/search')
+    def list_by_search(self, request, pk=None):
         data = self.request.data
 
         try:
