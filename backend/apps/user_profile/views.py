@@ -42,8 +42,10 @@ class UserProfileView(viewsets.GenericViewSet):
             city = data['city']
             state_province_region = data['state_province_region']
             zipcode = data['zipcode']
+            dni = data['dni']
             phone = data['phone']
             country_region = data['country_region']
+            photo = data['photo']
 
             self.model.objects.filter(user=user).update(
                 address_line_1=address_line_1,
@@ -51,8 +53,10 @@ class UserProfileView(viewsets.GenericViewSet):
                 city=city,
                 state_province_region=state_province_region,
                 zipcode=zipcode,
+                dni=dni,
                 phone=phone,
-                country_region=country_region
+                country_region=country_region,
+                photo=photo
             )
 
             user_profile = self.model.objects.get(user=user)
@@ -68,7 +72,8 @@ class UserProfileView(viewsets.GenericViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-    def retrieve(self, request, pk=None):
+    @action(detail=False, methods=['GET'], url_name='me', url_path='me')
+    def me_retrieve(self, request, pk=None):
         try:
             user = self.request.user
             user_profile = self.model.objects.get(user=user)
