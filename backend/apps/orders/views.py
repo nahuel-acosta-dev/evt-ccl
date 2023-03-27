@@ -4,11 +4,15 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
+from apps.orders.serializers import OrderSerializer, OrderItemSerializer
 from .models import Order, OrderItem
 
 
 class OrdersView(viewsets.GenericViewSet):
     model = Order
+    model_item = OrderItem
+    serializer_class = OrderSerializer
+    order_item_serializer_class = OrderItemSerializer
     queryset = None
 
     def get_object(self, pk):
@@ -44,7 +48,7 @@ class OrdersView(viewsets.GenericViewSet):
                 result['shipping_price'] = order.shipping_price
                 result['date_issued'] = order.date_issued
 
-                order_items = OrderItem.objects.order_by(
+                order_items = self.model_item.objects.order_by(
                     '-date_added').filter(order=order)
                 result['order_items'] = []
 
@@ -56,8 +60,22 @@ class OrdersView(viewsets.GenericViewSet):
                     sub_item['count'] = order_item.count
 
                     result['order_items'].append(sub_item)
+
+                """
+                #esta es la forma de anidar los orders_items en orders usando el serializers
+                
+                orders_item = self.order_item_serializer_class(
+                    order_items, many=True)
+
+                print(orders_item.data)
+
+                orders = self.serializer_class(
+                    order, context={'order_item': orders_item.data})
+                """
+
                 return Response(
                     {'order': result},
+                    # {'order': orders.data},
                     status=status.HTTP_200_OK
                 )
             else:
