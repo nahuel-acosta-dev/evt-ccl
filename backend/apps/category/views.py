@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
-
+from .serializers import CategorySerializer
 from .models import Category
 
 # Create your views here.
@@ -12,6 +12,7 @@ from .models import Category
 
 class CategoriesView(viewsets.GenericViewSet):
     model = Category
+    serializer_class = CategorySerializer
     queryset = None
     permission_classes = (permissions.AllowAny, )
 
