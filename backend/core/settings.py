@@ -42,29 +42,38 @@ FRONTEND = os.environ.get('FRONTEND')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '0.0.0.0',
-                 '127.0.0.1', 'http://localhost:3000']
-
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://localhost:8000',
     'http://127.0.0.1:3000',
-    'http://127.0.0.1:8000'
+    'http://127.0.0.1:8000',
 ]
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:8000',
+)
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
     'http://127.0.0.1:3000',
-    'http://127.0.0.1:8000'
+    'http://127.0.0.1:8000',
 ]
 
+ALLOWED_HOSTS = ['localhost', '0.0.0.0',
+                 '127.0.0.1', 'http://localhost:3000']
+
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
 DJANGO_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,13 +81,13 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'corsheaders',
 ]
 
 PROJECT_APPS = ['apps.user', 'apps.category',
                 'apps.products', 'apps.orders', 'apps.user_profile']
 CHAT_APPS = []
 THIRD_PARTY_APPS = [
-    'corsheaders',
     'rest_framework',
     'rest_framework_extensions',
     'djoser',
@@ -116,16 +125,16 @@ SITE_ID = 1
 
 
 MIDDLEWARE = [
-    'social_django.middleware.SocialAuthExceptionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.common.CommonMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -208,10 +217,12 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_USE_TLS = True
 
 PROTOCOL = "https"
+# PROTOCOL = "http"
 DOMAIN = os.environ.get('DOMAIN')
 
 DJOSER = {
     'PROTOCOL': 'https',
+    # 'PROTOCOL': 'http',
     'DOMAIN': os.environ.get('FRONTEND'),
     'SITE_NAME': 'FEST-MUSIC',
     'LOGIN_FIELD': 'email',
@@ -230,10 +241,10 @@ DJOSER = {
                                           'http://127.0.0.1:8000/google',
                                           'http://localhost:8000/login',
                                           'http://127.0.0.1:3000/google',
-                                          'http://localhost:3000/google/',
-                                          'https://chat-app-indol-mu.vercel.app/google',
-                                          'https://chat-app-indol-mu.vercel.app/google/'
-
+                                          'http://localhost:8000/google/',
+                                          'http://127.0.0.1:8000/google/',
+                                          'http://localhost:8000/login/',
+                                          'http://127.0.0.1:3000/google/',
                                           ],
     'SERIALIZERS': {
         'user_create': 'accounts.serializers.UserCreateSerializer',
@@ -326,5 +337,7 @@ if not DEBUG:
 AUTH_USER_MODEL = "user.UserAccount"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
