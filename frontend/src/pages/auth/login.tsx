@@ -10,6 +10,7 @@ import GoogleButtonLogin from '../../components/auth/GoogleButtonLogin'
 import Loading from '../../components/loading/Loading';
 import Auth from "../../components/auth/Auth";
 import Layout from "../../hocs/Layout";
+import WithPublicRoute from "@/src/hocs/auth/WithPublicRoute";
 
 
 const LoginScreen = () => {
@@ -23,6 +24,8 @@ const LoginScreen = () => {
     const dispatch = useDispatch();
     
     console.log(isLoading);
+
+
       
     useEffect(() => {
         if (userRef.current !== null) {userRef.current.focus();}
@@ -120,5 +123,5 @@ const LoginScreen = () => {
     </Layout>
     )
 }
-
+LoginScreen.Public = WithPublicRoute;
 export default LoginScreen;

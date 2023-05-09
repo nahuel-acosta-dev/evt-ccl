@@ -28,7 +28,9 @@ const Noop = ({children}: PropsJSX) => (<>{children}</>);
 //debe quedar asi ({children}: any) => (<>{children}</>);
 
 type CustomAppProps = AppProps & {
-    Component: NextComponentType & { Auth?: any }
+    Component: NextComponentType & { 
+        Auth?: any,
+        Public?: any                                 }
   }
 //const MyApp = ({Component, pageProps}: AppProps) => { modificar el appProps para onclior el Component.Auth
 //https://figueroanicolas-a.medium.com/crear-rutas-privadas-en-nextjs-2021-f%C3%A1cil-1425f4e9aef3
@@ -37,6 +39,7 @@ const MyApp = ({Component, pageProps}: CustomAppProps) => {
     const router = useRouter();
 
     const Auth = Component.Auth || Noop;
+    const Public = Component.Public || Noop;
 
     useEffect(() => {
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
@@ -46,9 +49,11 @@ const MyApp = ({Component, pageProps}: CustomAppProps) => {
     <Provider store={store}>
         <PersistLogin>
             <Auth>
-                <SSRProvider>
-                    <Component {...pageProps} />
-                </SSRProvider>
+                <Public>
+                    <SSRProvider>
+                        <Component {...pageProps} />
+                    </SSRProvider>
+                </Public>
             </Auth>
         </PersistLogin>
     </Provider>
