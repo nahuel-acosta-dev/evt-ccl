@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import {useRegisterMutation} from '../../redux/features/auth/registerApiSlice';
+import {useRegisterMutation} from '../../redux-cfg/features/auth/registerApiSlice';
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import Auth from "../../components/auth/Auth";
 import Layout from "../../hocs/Layout";

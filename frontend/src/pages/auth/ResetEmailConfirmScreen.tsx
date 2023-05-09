@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Auth from "../../components/auth/Auth";
-import {useResetEmailMutation} from '../../redux/features/auth/resetEmailApiSlice';
+import {useResetEmailMutation} from '../../redux-cfg/features/auth/resetEmailApiSlice';
 import Layout from "../../hocs/Layout";
 import { useRouter } from "next/router";
 

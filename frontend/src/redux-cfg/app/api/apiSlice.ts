@@ -10,13 +10,13 @@ export const baseQuery = fetchBaseQuery({
   baseUrl: `${process.env.NEXT_PUBLIC_API_URL}`,
     credentials: 'include',
     'prepareHeaders': (headers, {getState}: any): Headers => {
+      console.log('Estamos en la base query')
         const token: string = getState().auth.token;
         if(token) {
             headers.set('Content-Type', 'application/json');
             headers.set('Accept', 'application/json');
             headers.set("Authorization", `JWT ${token}`);//si no funciona probar authorization
           }
-          console.log('esta es la variable de entorno: ' + process.env.NEXT_PUBLIC_API_URL);
         return headers;
     }
 
@@ -33,6 +33,8 @@ unknown,
 FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
+  console.log('ESTOY EN APISLICE')
+  console.log(api.getState())
   if (result?.error?.status === 401 || result?.error?.status === 403){
       console.log('sending refresh token');
       const appState = api.getState() as AppState;

@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Auth from "../../components/auth/Auth";
-import {useResetPasswordConfirmMutation} from '../../redux/features/auth/resetPasswordConfirmApiSlice';
+import {useResetPasswordConfirmMutation} from '../../redux-cfg/features/auth/resetPasswordConfirmApiSlice';
 import Layout from "../../hocs/Layout";
 import { useRouter } from "next/router";
 

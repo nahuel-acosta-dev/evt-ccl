@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import { setCredentials } from '../../redux/features/auth/authSlice';
-import { selectCurrentToken } from '../../redux/features/auth/authSlice';
+import { setCredentials } from '../../redux-cfg/features/auth/authSlice';
+import { selectCurrentToken } from '../../redux-cfg/features/auth/authSlice';
 import { useRouter } from 'next/router';
-import {useGoogleMutation} from '../../redux/features/auth/authGoogleSlice';
+import {useGoogleMutation} from '../../redux-cfg/features/auth/authGoogleSlice';
 import queryString from 'query-string';
 
 interface Details {

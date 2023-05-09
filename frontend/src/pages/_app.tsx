@@ -13,12 +13,19 @@ import { useEffect } from 'react';
 import ProtectedRoutes from '../constants/routes/ProtectedRoutes';
 import type {AppProps} from 'next/app';
 import { Provider } from 'react-redux';
-import { store } from '../redux/store';
+import { store } from '../redux-cfg/store';
 import { NextComponentType } from 'next';
 import { Session } from 'inspector';
+import PersistLogin from '../hocs/auth/PersistLogin';
 
-const Noop = ({ children }: any) => <>{children}</>;
 
+interface PropsJSX {
+    children: JSX.Element
+}
+
+const Noop = ({children}: PropsJSX) => (<>{children}</>);
+//si hay error de renderizacion children el problema es aqui
+//debe quedar asi ({children}: any) => (<>{children}</>);
 
 type CustomAppProps = AppProps & {
     Component: NextComponentType & { Auth?: any }
@@ -31,22 +38,19 @@ const MyApp = ({Component, pageProps}: CustomAppProps) => {
 
     const Auth = Component.Auth || Noop;
 
-    console.log('la siguiente es la ruta')
-    console.log(router.pathname)
-
     useEffect(() => {
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
     }, []);
 
     return (
     <Provider store={store}>
-        {/*<ProtectedRoutes router={router}>*/}
-        <Auth>
-            <SSRProvider>
-                <Component {...pageProps} />
-            </SSRProvider>
-        </Auth>
-        {/*</ProtectedRoutes>*/}
+        <PersistLogin>
+            <Auth>
+                <SSRProvider>
+                    <Component {...pageProps} />
+                </SSRProvider>
+            </Auth>
+        </PersistLogin>
     </Provider>
     )
 }

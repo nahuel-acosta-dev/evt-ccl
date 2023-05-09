@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import {useActivateMutation} from '../../redux/features/auth/activateApiSlice';
+import {useActivateMutation} from '../../redux-cfg/features/auth/activateApiSlice';
 import Layout from "../../hocs/Layout";
 import { Button } from "react-bootstrap";
 import Auth from "../../components/auth/Auth";

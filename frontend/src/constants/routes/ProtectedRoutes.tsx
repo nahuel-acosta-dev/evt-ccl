@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
-import { selectCurrentProfile } from '../../redux/features/profile/profileSlice';
-import { selectCurrentToken } from '../../redux/features/auth/authSlice';
-import { logOut } from '../../redux/features/auth/authSlice';
+import { selectCurrentProfile } from '../../redux-cfg/features/profile/profileSlice';
+import { selectCurrentToken } from '../../redux-cfg/features/auth/authSlice';
+import { logOut } from '../../redux-cfg/features/auth/authSlice';
 import { appRoutes } from '../routes';
 import { ProfileUser } from '@/src/types/profile';
 

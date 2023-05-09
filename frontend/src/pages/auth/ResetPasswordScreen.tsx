@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import Auth from '../../components/auth/Auth';
 import WithPrivateRoute from '../../hocs/auth/WithPrivateRoute';
-import { useResetPasswordMutation } from '../../redux/features/auth/resetPasswordApiSlice';
+import { useResetPasswordMutation } from '../../redux-cfg/features/auth/resetPasswordApiSlice';
 import Layout from "../../hocs/Layout";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { useRouter } from "next/router";

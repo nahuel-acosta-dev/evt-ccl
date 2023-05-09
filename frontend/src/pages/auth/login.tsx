@@ -1,8 +1,8 @@
 "use client"
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCredentials } from '../../redux/features/auth/authSlice';
-import {useLoginMutation} from '../../redux/features/auth/authApiSlice';
+import { setCredentials } from '../../redux-cfg/features/auth/authSlice';
+import {useLoginMutation} from '../../redux-cfg/features/auth/authApiSlice';
 import { Button, Col, Form, Row } from "react-bootstrap";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -21,8 +21,9 @@ const LoginScreen = () => {
     const navigate = useRouter();
     const [login, { isLoading, isError }] = useLoginMutation();
     const dispatch = useDispatch();
-
+    
     console.log(isLoading);
+      
     useEffect(() => {
         if (userRef.current !== null) {userRef.current.focus();}
     }, []);

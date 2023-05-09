@@ -11,7 +11,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import SSRProvider from 'react-bootstrap/SSRProvider';
 import styles from './page.module.css'
 import App from '../styles/App.module.scss'
-import { store } from '../redux/store';
+import { store } from '../redux-cfg/store';
 import { Provider } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';

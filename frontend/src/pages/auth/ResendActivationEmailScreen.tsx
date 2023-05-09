@@ -1,6 +1,6 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import Layout from "../../hocs/Layout";
-import {useResendEmailActivationMutation} from '../../redux/features/auth/resendEmailActivationApiSlice';
+import {useResendEmailActivationMutation} from '../../redux-cfg/features/auth/resendEmailActivationApiSlice';
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import Auth from "../../components/auth/Auth";
 
