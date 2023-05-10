@@ -1,11 +1,9 @@
 
-interface TokensLogged {
-  token: string,
-  refresh: string
-}
-
 export interface Auth {
-  auth: TokensLogged
+  auth: {
+    token: string,
+    refresh: string
+  }
 }
 
 

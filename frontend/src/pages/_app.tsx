@@ -48,13 +48,13 @@ const MyApp = ({Component, pageProps}: CustomAppProps) => {
     return (
     <Provider store={store}>
         <PersistLogin>
+        <Public>
             <Auth>
-                <Public>
-                    <SSRProvider>
-                        <Component {...pageProps} />
-                    </SSRProvider>
-                </Public>
+                <SSRProvider>
+                    <Component {...pageProps} />
+                </SSRProvider>
             </Auth>
+            </Public>
         </PersistLogin>
     </Provider>
     )

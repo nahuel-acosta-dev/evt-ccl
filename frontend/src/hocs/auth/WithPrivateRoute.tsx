@@ -1,31 +1,46 @@
 'use client';
 import {useDispatch, useSelector} from 'react-redux';
-import { selectCurrentToken } from '../../redux-cfg/features/auth/authSlice';
-import { useEffect } from 'react';
+import { selectCurrentToken, selectCurrentLoading } from '../../redux-cfg/features/auth/authSlice';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Loading from '@/src/components/loading/Loading';
 
 interface PropsJSX {
   children: JSX.Element
 }
-
+interface AuthSlice {
+  auth:{
+      isLoading: boolean,
+      access: string | null,
+      refresh: string | null
+  }
+}
 const WithPrivateRoute = ( {children} : PropsJSX) => {
   const router = useRouter();
-  
+  //const {isLoading} = useSelector((state: AuthSlice) => state.auth);
+  const loading = useSelector(selectCurrentLoading);
+  const [isLoading, setIsLoading] = useState(true);
   const token = useSelector(selectCurrentToken);
   console.log("este es el token: " + token);
 
   useEffect(() => {
-      const existTokens = localStorage.getItem('authTokens');
-      //verificamos los tokens del localStorage
-      //puede ser que haya un error en caso de que el token no se borre y nunca redirija a login
-      //verificar
-      if (!existTokens && !token) {
-        router.push('/auth/login');
+      console.log('token', token);
+      //console.log('isLoading', isLoading);
+      if(!localStorage.getItem("authTokens") && !token){
+          router.push('/auth/login');
+          setIsLoading(false);
+      }else{
+        setIsLoading(false);
       }
-
   }, [token]);
+  
 
-  return (<>{children}</>);
+  return (
+    isLoading ?
+    <Loading/>
+    :
+    children
+    );
     
 };
 
