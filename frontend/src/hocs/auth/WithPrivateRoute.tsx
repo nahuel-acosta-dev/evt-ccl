@@ -1,6 +1,6 @@
 'use client';
 import {useDispatch, useSelector} from 'react-redux';
-import { selectCurrentToken, selectCurrentLoading } from '../../redux-cfg/features/auth/authSlice';
+import { selectCurrentToken} from '../../redux-cfg/features/auth/authSlice';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Loading from '@/src/components/loading/Loading';
@@ -18,7 +18,6 @@ interface AuthSlice {
 const WithPrivateRoute = ( {children} : PropsJSX) => {
   const router = useRouter();
   //const {isLoading} = useSelector((state: AuthSlice) => state.auth);
-  const loading = useSelector(selectCurrentLoading);
   const [isLoading, setIsLoading] = useState(true);
   const token = useSelector(selectCurrentToken);
   console.log("este es el token: " + token);

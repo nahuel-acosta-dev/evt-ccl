@@ -46,4 +46,4 @@ export const {setCredentials, logOut} = authSlice.actions;
 export default authSlice.reducer;
 
 export const selectCurrentToken = (state: Auth): string => state.auth.token;
-export const selectCurrentLoading = (state: any): boolean => state.auth.isLoading;
+//export const selectCurrentLoading = (state: any): boolean => state.auth.isLoading;

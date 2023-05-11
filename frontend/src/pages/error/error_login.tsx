@@ -1,6 +1,7 @@
 import Layout from "../../hocs/Layout";
 
 const ErrorLogin = () => {
+    //debemos redireccionar a login o / nuevamente ya que el logueo fallo
 
     return(
         <Layout>

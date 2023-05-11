@@ -1,6 +1,6 @@
 'use client';
 import {useDispatch, useSelector} from 'react-redux';
-import { selectCurrentLoading, selectCurrentToken } from '../../redux-cfg/features/auth/authSlice';
+import { selectCurrentToken } from '../../redux-cfg/features/auth/authSlice';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Loading from '@/src/components/loading/Loading';
@@ -22,17 +22,15 @@ const WithPublicRoute = ( {children} : PropsJSX) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const {isLoading} = useSelector((state: AuthSlice) => state.auth);
-  const loading = useSelector(selectCurrentLoading);
   const token = useSelector(selectCurrentToken);
 
   console.log('estamos en public');
 
   useEffect(() => {
     console.log('token', token);
-    console.log('el valor de loading ahora es: ', loading);
     console.log('el valor de isLoading ahora es: ', isLoading);
 
-}, [loading, dispatch, isLoading]);
+}, [dispatch, isLoading]);
 
   useEffect(() => {
       console.log('token', token);

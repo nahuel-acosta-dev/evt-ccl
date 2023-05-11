@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import { setCredentials } from '../../redux-cfg/features/auth/authSlice';
@@ -23,23 +24,6 @@ const GoogleRedirect = () => {
 
     
 
-
-    const googleAuth = async (urlDetails: any) => {
-        try{
-            const googleData: any = await google(urlDetails);
-            const email = googleData.data.user;
-            dispatch(setCredentials({ ...googleData.data,  email }));
-            console.log(googleData);
-            console.log(googleData.data);
-            console.log(googleData.refresh);
-            router.push('/app/home');
-        }
-        catch(err){
-            console.log(err);
-            router.push('/auth/errorLogin?error=error');
-        }
-    }
-
     useEffect(() => {
         let {state, code}: any = router.query;
         state = state ? state : null;
@@ -47,6 +31,22 @@ const GoogleRedirect = () => {
 
         console.log('State: ' + state);
         console.log('Code: ' + code);
+
+        const googleAuth = async (urlDetails: any) => {
+            try{
+                const googleData: any = await google(urlDetails);
+                const email = googleData.data.user;
+                dispatch(setCredentials({ ...googleData.data,  email }));
+                console.log(googleData);
+                console.log(googleData.data);
+                console.log(googleData.refresh);
+                router.push('/app/home');
+            }
+            catch(err){
+                console.log(err);
+                router.push('/auth/error/error_login?error=error');
+            }
+        }
 
         if (state && code) {
             
@@ -59,9 +59,13 @@ const GoogleRedirect = () => {
         }
     }, [location]);
 
-    if(token){
-        return router.push("/app/home");
-    }
+    useEffect(() => {
+        if(token){
+            router.push("/app/home");
+        }
+    }, [token]);
+
+    
 
     return (
         <div className='container text-center'>
